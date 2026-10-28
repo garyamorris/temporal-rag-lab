@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "temporal-rag-lab": {
+      "command": "uv",
+      "args": ["--directory", "/absolute/path/to/temporal-rag-lab", "run", "raglab", "mcp"]
+    }
+  }
+}

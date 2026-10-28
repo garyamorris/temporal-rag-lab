@@ -1,0 +1,387 @@
+{
+  "name": "Temporal stress v1",
+  "description": "Controlled history-depth and arrival-order experiments. The same relational facts, questions, oracle and evidence budgets are used for every backend. A harder workload is not a promise that Graphiti wins.",
+  "metadata": {
+    "kind": "temporal-stress",
+    "generator_version": 1,
+    "depths": [
+      12
+    ],
+    "seeds": [
+      7
+    ],
+    "orders": [
+      "late"
+    ],
+    "context_budgets": [
+      512,
+      2048
+    ],
+    "overlapping_sources": true,
+    "oracle": "latest effective event at query time",
+    "limitations": [
+      "Synthetic ownership workload; not a comprehensive application benchmark.",
+      "Paired probes within a scenario are correlated.",
+      "Does not test retroactive corrections, provenance trust ranking or multi-hop joins."
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "history-12-seed-7-late",
+      "description": "12 successive owners, late arrival, stable reviewer and similar-project distractors; no explicit end dates in source facts.",
+      "metadata": {
+        "family": "ownership-churn",
+        "history_depth": 12,
+        "seed": 7,
+        "arrival_order": "late"
+      },
+      "steps": [
+        {
+          "id": "reviewer",
+          "document_id": "reviewer",
+          "text": "The security reviewer for Project Meridian-7 is Rowan Bennett.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "similar-project",
+          "document_id": "similar-project",
+          "text": "Project Meridian-7-Archive has sole accountable owner Rowan Bennett. Project Meridian-7-Archive is distinct from Project Meridian-7.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-00",
+          "document_id": "ownership-register",
+          "text": "Uma Fischer is now the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "audit-00",
+          "document_id": "independent-audit-00",
+          "text": "The independent operations audit confirms that Uma Fischer is the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-11",
+          "document_id": "ownership-register",
+          "text": "The sole accountable ownership of Project Meridian-7 transfers to Imani Cruz.",
+          "effective_at": "2025-03-19T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-04",
+          "document_id": "ownership-register",
+          "text": "Project Meridian-7 has a new sole accountable owner: Ellis Romano.",
+          "effective_at": "2025-01-29T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "audit-04",
+          "document_id": "independent-audit-04",
+          "text": "The independent operations audit confirms that Ellis Romano is the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-01-29T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-10",
+          "document_id": "ownership-register",
+          "text": "Project Meridian-7 has a new sole accountable owner: Quinn Ibrahim.",
+          "effective_at": "2025-03-12T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-09",
+          "document_id": "ownership-register",
+          "text": "Emery Lewis is now the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-03-05T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-08",
+          "document_id": "ownership-register",
+          "text": "The sole accountable ownership of Project Meridian-7 transfers to Logan Price.",
+          "effective_at": "2025-02-26T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "audit-08",
+          "document_id": "independent-audit-08",
+          "text": "The independent operations audit confirms that Logan Price is the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-02-26T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-02",
+          "document_id": "ownership-register",
+          "text": "The sole accountable ownership of Project Meridian-7 transfers to Arden Lee.",
+          "effective_at": "2025-01-15T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-07",
+          "document_id": "ownership-register",
+          "text": "Project Meridian-7 has a new sole accountable owner: Yael Martin.",
+          "effective_at": "2025-02-19T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-06",
+          "document_id": "ownership-register",
+          "text": "Greer Costa is now the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-02-12T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-05",
+          "document_id": "ownership-register",
+          "text": "The sole accountable ownership of Project Meridian-7 transfers to Jordan Fox.",
+          "effective_at": "2025-02-05T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-03",
+          "document_id": "ownership-register",
+          "text": "Devon Shah is now the sole accountable owner of Project Meridian-7.",
+          "effective_at": "2025-01-22T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "owner-01",
+          "document_id": "ownership-register",
+          "text": "Project Meridian-7 has a new sole accountable owner: Jules Mensah.",
+          "effective_at": "2025-01-08T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "current-b512",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-03-20? Give only the person's full name.",
+              "expected_any": [
+                "Imani Cruz"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-03-20T00:00:00Z",
+              "category": "current",
+              "dimension": "temporal",
+              "temporal_role": "current",
+              "context_tokens": 512
+            },
+            {
+              "id": "current-b2048",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-03-20? Give only the person's full name.",
+              "expected_any": [
+                "Imani Cruz"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-03-20T00:00:00Z",
+              "category": "current",
+              "dimension": "temporal",
+              "temporal_role": "current",
+              "context_tokens": 2048
+            },
+            {
+              "id": "early-b512",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-01-02? Give only the person's full name.",
+              "expected_any": [
+                "Uma Fischer"
+              ],
+              "forbidden_any": [
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Imani Cruz",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-01-02T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 512
+            },
+            {
+              "id": "early-b2048",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-01-02? Give only the person's full name.",
+              "expected_any": [
+                "Uma Fischer"
+              ],
+              "forbidden_any": [
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Imani Cruz",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-01-02T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 2048
+            },
+            {
+              "id": "middle-b512",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-02-13? Give only the person's full name.",
+              "expected_any": [
+                "Greer Costa"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Imani Cruz",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-02-13T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 512
+            },
+            {
+              "id": "middle-b2048",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-02-13? Give only the person's full name.",
+              "expected_any": [
+                "Greer Costa"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Imani Cruz",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-02-13T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 2048
+            },
+            {
+              "id": "boundary-b512",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-03-19? Give only the person's full name.",
+              "expected_any": [
+                "Imani Cruz"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-03-19T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 512
+            },
+            {
+              "id": "boundary-b2048",
+              "query": "Who is the sole accountable owner of Project Meridian-7 as of 2025-03-19? Give only the person's full name.",
+              "expected_any": [
+                "Imani Cruz"
+              ],
+              "forbidden_any": [
+                "Uma Fischer",
+                "Jules Mensah",
+                "Arden Lee",
+                "Devon Shah",
+                "Ellis Romano",
+                "Jordan Fox",
+                "Greer Costa",
+                "Yael Martin",
+                "Logan Price",
+                "Emery Lewis",
+                "Quinn Ibrahim",
+                "Rowan Bennett"
+              ],
+              "as_of": "2025-03-19T00:00:00Z",
+              "category": "historical",
+              "dimension": "temporal",
+              "temporal_role": "historical",
+              "context_tokens": 2048
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

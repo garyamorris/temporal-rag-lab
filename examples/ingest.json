@@ -1,0 +1,10 @@
+{
+  "backend": "graphiti",
+  "namespace": "agent",
+  "update": {
+    "id": "atlas-owner-2025-01-01",
+    "document_id": "atlas-ownership",
+    "text": "Alice Mercer is the sole owner of Project Atlas.",
+    "effective_at": "2025-01-01T00:00:00Z"
+  }
+}

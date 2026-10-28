@@ -1,0 +1,263 @@
+{
+  "name": "Changing knowledge",
+  "description": "A small synthetic suite testing changes, corrections, late arrivals, and source deletion. Not a production ranking.",
+  "scenarios": [
+    {
+      "id": "owner-change",
+      "description": "A project changes owner. Current retrieval should prefer the new owner; historical retrieval should retain the former owner.",
+      "steps": [
+        {
+          "id": "owner-v1",
+          "document_id": "atlas-owner",
+          "text": "As of January 1, 2025, Alice Mercer is the sole owner of Project Atlas.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "owner-initial",
+              "query": "Who is the sole owner of Project Atlas?",
+              "expected_any": [
+                "Alice Mercer"
+              ],
+              "forbidden_any": [],
+              "as_of": null,
+              "category": "baseline"
+            }
+          ]
+        },
+        {
+          "id": "owner-v2",
+          "document_id": "atlas-owner",
+          "text": "Effective February 1, 2025, Bob Chen replaces Alice Mercer as the sole owner of Project Atlas. Alice Mercer no longer owns Project Atlas.",
+          "effective_at": "2025-02-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "owner-current",
+              "query": "Who is the sole owner of Project Atlas now?",
+              "expected_any": [
+                "Bob Chen"
+              ],
+              "forbidden_any": [
+                "Alice Mercer"
+              ],
+              "as_of": null,
+              "category": "changed-current"
+            },
+            {
+              "id": "owner-history",
+              "query": "Who was the sole owner of Project Atlas on January 15, 2025?",
+              "expected_any": [
+                "Alice Mercer"
+              ],
+              "forbidden_any": [
+                "Bob Chen"
+              ],
+              "as_of": "2025-01-15T00:00:00Z",
+              "category": "historical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "release-correction",
+      "description": "An erroneous release date is corrected; distinguish a correction from accumulating two equally current facts.",
+      "steps": [
+        {
+          "id": "release-v1",
+          "document_id": "beacon-release",
+          "text": "The launch date of Beacon 2.0 is May 12, 2025.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "release-initial",
+              "query": "What is the launch date of Beacon 2.0?",
+              "expected_any": [
+                "May 12",
+                "12 May",
+                "2025-05-12"
+              ],
+              "forbidden_any": [],
+              "as_of": null,
+              "category": "baseline"
+            }
+          ]
+        },
+        {
+          "id": "release-v2",
+          "document_id": "beacon-release",
+          "text": "Correction issued February 1, 2025: Beacon 2.0 launches on May 19, 2025. The previously reported May 12, 2025 launch date was incorrect and must not be used.",
+          "effective_at": "2025-02-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "release-corrected",
+              "query": "What is the corrected launch date of Beacon 2.0?",
+              "expected_any": [
+                "May 19",
+                "19 May",
+                "2025-05-19"
+              ],
+              "forbidden_any": [
+                "May 12",
+                "12 May",
+                "2025-05-12"
+              ],
+              "as_of": null,
+              "category": "correction"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-arrival",
+      "description": "February evidence arrives after March evidence. Latest ingestion must not be mistaken for latest valid state.",
+      "steps": [
+        {
+          "id": "lead-january",
+          "document_id": "orion-lead",
+          "text": "As of January 1, 2025, Alice Mercer is the sole lead of Project Orion.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "lead-march",
+          "document_id": "orion-lead",
+          "text": "As of March 1, 2025, Clara Singh takes over as the sole lead of Project Orion. No other person is the lead from March 1 onward.",
+          "effective_at": "2025-03-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "lead-march-current",
+              "query": "Who is the sole lead of Project Orion now?",
+              "expected_any": [
+                "Clara Singh"
+              ],
+              "forbidden_any": [
+                "Alice Mercer"
+              ],
+              "as_of": null,
+              "category": "changed-current"
+            }
+          ]
+        },
+        {
+          "id": "lead-february-late",
+          "document_id": "orion-lead",
+          "text": "Late-arriving February record: Bob Chen was the sole lead of Project Orion from February 1, 2025 until March 1, 2025. This record describes February only.",
+          "effective_at": "2025-02-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "late-current",
+              "query": "Who is the sole lead of Project Orion now?",
+              "expected_any": [
+                "Clara Singh"
+              ],
+              "forbidden_any": [
+                "Bob Chen",
+                "Alice Mercer"
+              ],
+              "as_of": null,
+              "category": "late-arrival-current"
+            },
+            {
+              "id": "late-february",
+              "query": "Who was the sole lead of Project Orion on February 15, 2025?",
+              "expected_any": [
+                "Bob Chen"
+              ],
+              "forbidden_any": [
+                "Clara Singh",
+                "Alice Mercer"
+              ],
+              "as_of": "2025-02-15T00:00:00Z",
+              "category": "historical"
+            },
+            {
+              "id": "late-january",
+              "query": "Who was the sole lead of Project Orion on January 15, 2025?",
+              "expected_any": [
+                "Alice Mercer"
+              ],
+              "forbidden_any": [
+                "Bob Chen",
+                "Clara Singh"
+              ],
+              "as_of": "2025-01-15T00:00:00Z",
+              "category": "historical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "source-deletion",
+      "description": "Delete one of two supporting sources. Shared knowledge should survive, while a fact supported only by the deleted source should disappear.",
+      "steps": [
+        {
+          "id": "ops-primary",
+          "document_id": "ops-handbook",
+          "text": "The Northstar support team uses support channel #northstar-help. Northstar's incident escalation code is 7359.",
+          "effective_at": "2025-01-01T00:00:00Z",
+          "operation": "upsert",
+          "probes": []
+        },
+        {
+          "id": "ops-secondary",
+          "document_id": "ops-directory",
+          "text": "The company directory confirms that the Northstar support team uses support channel #northstar-help.",
+          "effective_at": "2025-01-02T00:00:00Z",
+          "operation": "upsert",
+          "probes": [
+            {
+              "id": "shared-before-delete",
+              "query": "What support channel does the Northstar support team use?",
+              "expected_any": [
+                "northstar-help"
+              ],
+              "forbidden_any": [],
+              "as_of": null,
+              "category": "baseline"
+            }
+          ]
+        },
+        {
+          "id": "ops-delete",
+          "document_id": "ops-handbook",
+          "text": "",
+          "effective_at": "2025-02-01T00:00:00Z",
+          "operation": "delete",
+          "probes": [
+            {
+              "id": "shared-survives",
+              "query": "What support channel does the Northstar support team use?",
+              "expected_any": [
+                "northstar-help"
+              ],
+              "forbidden_any": [],
+              "as_of": null,
+              "category": "deletion-preservation"
+            },
+            {
+              "id": "unique-removed",
+              "query": "What is Northstar's incident escalation code?",
+              "expected_any": [
+                "Insufficient evidence"
+              ],
+              "forbidden_any": [
+                "7359"
+              ],
+              "as_of": null,
+              "category": "deletion"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
